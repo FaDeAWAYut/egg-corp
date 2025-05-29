@@ -6,6 +6,7 @@ import Link from "next/link";
 import Lenis from "lenis";
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import { motion } from "framer-motion";
+import Header from '@/components/Header';
 
 export default function Home() {
 
@@ -60,42 +61,8 @@ export default function Home() {
         </Parallax>
 
         <div className="relative z-10">
-          <header className="h-[120px] bg-transparent">
-            <nav className="flex justify-center items-center h-full px-5">
-              <div className="relative flex items-center justify-center space-x-20">
-                <a href="/" className="tracking-[-1px] relative font-kanit text-[24px] text-[#000000] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-black after:transition-all after:duration-300 group-hover:after:w-0 group-hover:after:left-1/2 duration-300 hover:scale-110">
-                  About us
-                </a>
-                <a href="/products" className="tracking-[-1px] relative font-kanit text-[24px] text-[#000000] after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full hover:after:left-0 group-hover:after:w-0 group-hover:after:left-1/2 duration-300 hover:scale-110">
-                  Products
-                </a>
-                <div>
-                  <Image src="/main_logo.png" width={80} height={80} alt="Logo"/>
-                </div>
-                <a href="/updates" className="tracking-[-1px] relative font-kanit text-[24px] text-[#000000] after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full hover:after:left-0 group-hover:after:w-0 group-hover:after:left-1/2 duration-300 hover:scale-110">
-                  Updates
-                </a>
-                <a href="/contact-us" className="tracking-[-1px] relative font-kanit text-[24px] text-[#000000] after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full hover:after:left-0 group-hover:after:w-0 group-hover:after:left-1/2 duration-300 hover:scale-110">
-                  Contact us
-                </a>
-              </div>
-              <div className="absolute right-5 flex space-x-5">
-                <div className="w-[47px] h-[47px] overflow-hidden transform translate-y-0">
-                  <Link href="https://www.facebook.com/EGGbiopak" target="_blank" rel="noopener noreferrer">
-                    <Image
-                      src="/facebook_svg.svg"
-                      layout="intrinsic"
-                      width={100}
-                      height={100}
-                      objectFit="contain"
-                      alt="Facebook Icon"
-                    />
-                  </Link>
-                </div>
-                <Image src="/line_svg.svg" width={40} height={40} alt="Line Icon" />
-              </div>
-            </nav>
-          </header>
+
+          <Header />
 
         <div className="relative">
 
@@ -110,8 +77,7 @@ export default function Home() {
                 style={{ transform: "translateY(-1.25rem)" }} // translate-y-5 = -1.25rem
               >
                 <a className="font-kanit font-semibold text-[96px] text-[#005844]">Egg Corporation</a>
-                <a className="font-kanit text-[24px] text-[#000000]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</a>
-                <a className="font-kanit text-[24px] transform -translate-y-2 text-[#000000]">eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+                <a className="font-kanit text-[24px] text-[#000000]">Your trust provider on plastic packaging and sustainable products.</a>
               </motion.div>
 
               {/* Image Container */}
@@ -192,10 +158,10 @@ export default function Home() {
                   >
                     <div>
 
-                    <a className="font-kanit font-semibold text-[24px] xl:text-[48px] lg:text-[36px] text-[#005844]">Egg Corporation </a>
+                    <a className="font-kanit font-semibold text-[24px] xl:text-[48px] lg:text-[36px] text-[#005844]">อี.จี.จี. คอร์เปอเรชั่น จำกัด </a>
                     
                     <a className="font-kanit font-extralight text-[16px] xl:text-[24px] lg:text-[20px] text-black">
-                      Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      เป็นผู้ผลิตบรรจุภัณฑ์พลาสติกและไบโอพลาสติกสำหรับอาหารและเครื่องดื่ม ทั้งแบบ Rigid และ Flexible Packaging ภายใต้แบรนด์ต่างๆ เช่น EGG, Klear และ EGG Biopak โดยมุ่งเน้นการพัฒนา Green Plastic Products เพื่อรองรับแนวคิดเศรษฐกิจหมุนเวียน (Circular Economy) และสิ่งแวดล้อมอย่างยั่งยืน.
                     </a>
 
                     </div>
@@ -267,8 +233,8 @@ export default function Home() {
           {/* Products Content */}
           <div className="flex flex-col z-0">
             <a className="flex justify-center font-kanit font-semibold text-[86px] text-[#005844]">Products</a>
-            <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-5">Lorem ipsum dolor sit amet, consectetur</a>
-            <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-7">adipiscing elit, sed do eiusmod</a>
+            <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-5">เรามุ่งมั่นที่จะจัดหาผลิตภัณฑ์พลาสติกที่ยั่งยืนซึ่งมีคุณค่า</a>
+            <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-7">ต่อผู้มีส่วนได้ส่วนเสียทั้งภายในและภายนอกทุกฝ่าย</a>
           </div>
 
           <div className="images-wrapper flex flex-col z-10 pr-4">
@@ -303,8 +269,8 @@ export default function Home() {
           />
           <div className="relative z-10 flex flex-col justify-center items-center">
             <a className="font-kanit font-semibold text-[86px] text-[#005844] pt-10">Videos</a>
-            <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-5">Lorem ipsum dolor sit amet, consectetur</a>
-            <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-7">adipiscing elit, sed do eiusmod</a>
+            <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-5">ชมวิดีโอโฆษณาที่ถ่ายทอดเรื่องราวของแบรนด์และผลิตภัณฑ์ของเรา</a>
+            <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-7">สะท้อนคุณภาพ นวัตกรรม และความมุ่งมั่นสู่ความยั่งยืน</a>
 
             {/* Video slider container */}
             <div className="relative flex justify-center items-center mt-6 w-full max-w-[1100px]">
@@ -371,8 +337,7 @@ export default function Home() {
         <div className="relative z-10 flex flex-col justify-center items-center">
 
           <a className="font-kanit font-semibold text-[86px] text-[#005844] pt-20">More from us</a>
-          <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-5">Lorem ipsum dolor sit amet, consectetur</a>
-          <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-7">adipiscing elit, sed do eiusmod</a>
+          <a className="flex justify-center font-kanit text-[24px] text-black -translate-y-5">เว็บไซต์ในเครือของเรา</a>
 
         </div>
 
