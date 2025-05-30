@@ -80,7 +80,7 @@ export default function Home() {
             <div className="mt-4"/>
             <span className="font-semibold text-black">เบอร์ติดต่อ : </span>
             <span className="font-extralight text-[#005844]">000-000-0000</span>
-            <span className="ml-8 font-semibold text-black">อีเมล์ : </span>
+            <span className="ml-8 font-semibold text-black">อีเมล : </span>
             <span className="font-extralight text-[#005844]">example@gmail.com</span>
             <div className="mt-4"/>
             <span className="font-semibold text-black">LineID : </span>
