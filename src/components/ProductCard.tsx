@@ -4,11 +4,12 @@ import { Product } from '../types/product';
 
 interface ProductCardProps {
   product: Product;
+
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product}) => {
   return (
-      <div className="flex flex-col md:flex-row bg-[#ffffff] bg-opacity-30 rounded-3xl shadow-md overflow-hidden mb-10 mt-10 min-h-80 mx-auto w-[95%]">
+      <div className="flex flex-col md:flex-row bg-[#ffffff] bg-opacity-30 rounded-3xl shadow-md overflow-hidden mb-10 min-h-80 mx-auto w-[95%]">
       {/* Image container - full width on mobile, 1/3 on larger screens */}
       <div className="flex w-full md:w-1/3 h-full relative items-center justify-center">
         <div className="w-2/3 md:w-full"> {/* Container for responsive width control */}

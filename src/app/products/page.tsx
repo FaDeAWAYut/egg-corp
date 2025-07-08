@@ -62,7 +62,7 @@ export default function Home() {
         <div className="h-[30vh]" />
 
         <div className="w-full bg-[#F9F6F1] shadow-[rgba(0,0,12,0.2)_0px_0px_60px_0px] px-10 py-6 text-center relative z-10">
-          <div className="font-kanit text-[48px] text-black">PALCEHOLDER</div>
+          <div className="font-kanit text-[48px] text-black">PLACEHOLDER</div>
         </div>
 
 

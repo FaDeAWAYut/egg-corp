@@ -12,6 +12,7 @@ import ProductCard from '@/components/ProductCard';
 export default function Home() {
 
   const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   // Smooth scroll
   useEffect(() => {
@@ -23,14 +24,20 @@ export default function Home() {
     requestAnimationFrame(raf);
   }, []);
 
-    // Fetch products
-    useEffect(() => {
-      const fetchProducts = async () => {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setIsLoading(true); // Set loading to true when starting fetch
+      try {
         const productsData = await getProducts();
         setProducts(productsData);
-      };
-      fetchProducts();
-    }, []);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setIsLoading(false); // Set loading to false when done
+      }
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <ParallaxProvider>
@@ -76,12 +83,27 @@ export default function Home() {
           <div className="font-kanit text-[48px] text-black">PLACEHOLDER</div>
         </div>
 
+        {/* Loading indicator */}
+        {isLoading && (
+          <div className="flex justify-center items-center h-[300px]">
+            <p className="font-kanit text-4xl text-[#000000]">กำลังโหลดข้อมูล...</p>
+          </div>
+        )}
 
-        <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] 2xl:pl-10 2xl:pr-10">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {/* Conditionally render content */}
+        {!isLoading && (
+          <>
+            <div className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
+              ถุงพลาสติก
+            </div>
+
+            <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </>
+        )}
 
 
 
