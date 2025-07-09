@@ -6,12 +6,15 @@ import Link from "next/link";
 import Lenis from "lenis";
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import Header from '@/components/Header';
-import { getProducts } from '@/lib/products';
+import { getProductBags, getProductCups, getProductCompostable, getProductService } from '@/lib/products';
 import { Product } from '@/types/product';
 import ProductCard from '@/components/ProductCard';
 export default function Home() {
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [productBags, setProductBags] = useState<Product[]>([]);
+  const [productCups, setProductCups] = useState<Product[]>([]);
+  const [productCompostable, setProductCompostable] = useState<Product[]>([]);
+  const [productService, setProductService] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   // Smooth scroll
@@ -26,14 +29,22 @@ export default function Home() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      setIsLoading(true); // Set loading to true when starting fetch
+      setIsLoading(true);
       try {
-        const productsData = await getProducts();
-        setProducts(productsData);
+        const [bagsData, cupsData, compostableData, serviceData] = await Promise.all([
+          getProductBags(),
+          getProductCups(),
+          getProductCompostable(),
+          getProductService()
+        ]);
+        setProductBags(bagsData);
+        setProductCups(cupsData);
+        setProductCompostable(compostableData);
+        setProductService(serviceData);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
-        setIsLoading(false); // Set loading to false when done
+        setIsLoading(false);
       }
     };
     fetchProducts();
@@ -93,16 +104,49 @@ export default function Home() {
         {/* Conditionally render content */}
         {!isLoading && (
           <>
+            {/* Plastic Bag Section */}
             <div className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
               ถุงพลาสติก
             </div>
 
             <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10">
-              {products.map((product) => (
+              {productBags.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
+
+            {/* Cups & Lids Section */}
+            <div className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
+              แก้วและฝา
+            </div>
+            <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
+              {productCups.map((product) => (
+                <ProductCard key={`cup-${product.id}`} product={product} />
+              ))}
+            </div>
+
+            {/* Compostable Section */}
+            <div className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
+              ผลิตภัณฑ์ย่อยสลายได้
+            </div>
+            <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
+              {productCompostable.map((product) => (
+                <ProductCard key={`cup-${product.id}`} product={product} />
+              ))}
+            </div>
+
+            {/* OEM Service Section */}
+            <div className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
+              บริการ OEM
+            </div>
+            <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
+              {productService.map((product) => (
+                <ProductCard key={`cup-${product.id}`} product={product} />
+              ))}
+            </div>
           </>
+
+          
         )}
 
 
