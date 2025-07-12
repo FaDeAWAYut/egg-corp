@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Product } from '../types/product';
+import Link from 'next/link';
 
 interface ProductCardProps {
   product: Product;
@@ -9,7 +10,12 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product}) => {
   return (
-      <div className="flex flex-col md:flex-row bg-[#E1DDD5] bg-opacity-30 rounded-3xl shadow-md overflow-hidden mb-10 min-h-80 mx-auto w-[95%]">
+    
+    <Link 
+      href={`/products/${product.id}`}
+      className="flex flex-col md:flex-row bg-[#E1DDD5] bg-opacity-30 rounded-3xl shadow-md overflow-hidden mb-10 min-h-80 mx-auto w-[95%]"
+      passHref
+    >
       {/* Image container - full width on mobile, 1/3 on larger screens */}
       <div className="flex w-full md:w-1/3 h-full relative items-center justify-center">
         <div className="w-2/3 md:w-full"> {/* Container for responsive width control */}
@@ -53,7 +59,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product}) => {
           </div>
         </div>
       </div>
-    </div>
+      </Link>
   );
 };
 
