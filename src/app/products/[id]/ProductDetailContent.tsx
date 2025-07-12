@@ -9,7 +9,7 @@ import Header from '@/components/Header';
 export default function ProductDetailContent({ product }: { product: Product }) {
   return (
     <ParallaxProvider>
-      <title>Updates | Egg Corporation</title>
+      <title>Egg Corporation</title>
       
       <main className="min-h-screen relative overflow-hidden">
 

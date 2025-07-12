@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <ParallaxProvider>
 
-      <title>Contact us | Egg Corporation</title>
+      <title>Egg Corporation</title>
 
       <main className="min-h-screen relative overflow-hidden">
 
