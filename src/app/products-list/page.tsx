@@ -9,6 +9,7 @@ import Header from '@/components/Header';
 import { getProductBags, getProductCups, getProductCompostable, getProductService } from '@/lib/products';
 import { Product } from '@/types/product';
 import ProductCard from '@/components/ProductCard';
+import Footer from "@/components/Footer";
 export default function Home() {
 
   const [productBags, setProductBags] = useState<Product[]>([]);
@@ -90,8 +91,80 @@ export default function Home() {
 
         <div className="h-[30vh]" />
 
-        <div className="w-full bg-[#F9F6F1] shadow-[rgba(0,0,12,0.2)_0px_0px_60px_0px] px-10 py-6 text-center relative z-10">
-          <div className="font-kanit text-[48px] text-black">PLACEHOLDER</div>
+        <div className="w-full bg-[#F9F6F1] shadow-[rgba(0,0,12,0.2)_0px_0px_60px_0px] px-10 py-6 relative z-10">
+          <div className="flex flex-wrap justify-center gap-8 md:gap-12">
+            {/* Plastic Bags */}
+            <div className="flex flex-col items-center w-[150px]"> {/* Fixed width container */}
+              <button 
+                onClick={() => document.getElementById('bags-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col items-center group w-full"
+              >
+                <div className="w-12 h-12 md:w-16 md:h-16 relative">
+                  <Image
+                    src="/plastic-bag-icon.png"
+                    alt="ถุงพลาสติก"
+                    fill
+                    className="object-contain transition-transform group-hover:scale-110"
+                  />
+                </div>
+                <p className="font-kanit text-l md:text-xl mt-2 text-black text-center w-full">ถุงพลาสติก</p>
+              </button>
+            </div>
+
+            {/* Cups & Lids */}
+            <div className="flex flex-col items-center w-[150px]">
+              <button 
+                onClick={() => document.getElementById('cups-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col items-center group w-full"
+              >
+                <div className="w-12 h-12 md:w-16 md:h-16 relative">
+                  <Image
+                    src="/coffee-cup-icon.png"
+                    alt="แก้วและฝา"
+                    fill
+                    className="object-contain transition-transform group-hover:scale-110"
+                  />
+                </div>
+                <p className="font-kanit text-l md:text-xl mt-2 text-black text-center w-full">แก้วและฝา</p>
+              </button>
+            </div>
+
+            {/* Compostable */}
+            <div className="flex flex-col items-center w-[150px]">
+              <button 
+                onClick={() => document.getElementById('compostable-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col items-center group w-full"
+              >
+                <div className="w-12 h-12 md:w-16 md:h-16 relative">
+                  <Image
+                    src="/dish-icon.png"
+                    alt="ผลิตภัณฑ์ EGG"
+                    fill
+                    className="object-contain transition-transform group-hover:scale-110"
+                  />
+                </div>
+                <p className="font-kanit text-l md:text-xl mt-2 text-black text-center w-full leading-tight">ผลิตภัณฑ์ EGG</p>
+              </button>
+            </div>
+
+            {/* OEM Service */}
+            <div className="flex flex-col items-center w-[150px]">
+              <button 
+                onClick={() => document.getElementById('service-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col items-center group w-full"
+              >
+                <div className="w-12 h-12 md:w-16 md:h-16 relative">
+                  <Image
+                    src="/leaves-icon.png"
+                    alt="บริการ OEM"
+                    fill
+                    className="object-contain transition-transform group-hover:scale-110"
+                  />
+                </div>
+                <p className="font-kanit text-l md:text-xl mt-2 text-black text-center w-full">บริการ OEM</p>
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Loading indicator */}
@@ -105,7 +178,7 @@ export default function Home() {
         {!isLoading && (
           <>
             {/* Plastic Bag Section */}
-            <div className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
+            <div id="bags-section" className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
               ถุงพลาสติก
             </div>
 
@@ -116,7 +189,7 @@ export default function Home() {
             </div>
 
             {/* Cups & Lids Section */}
-            <div className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
+            <div id="cups-section" className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
               แก้วและฝา
             </div>
             <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
@@ -126,7 +199,7 @@ export default function Home() {
             </div>
 
             {/* Compostable Section */}
-            <div className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
+            <div id="compostable-section" className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
               ผลิตภัณฑ์ย่อยสลายได้
             </div>
             <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
@@ -136,7 +209,7 @@ export default function Home() {
             </div>
 
             {/* OEM Service Section */}
-            <div className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
+            <div id="service-section" className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
               บริการ OEM
             </div>
             <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
@@ -150,7 +223,7 @@ export default function Home() {
         )}
 
 
-
+      <Footer/>
         
       </main>
 
