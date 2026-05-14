@@ -11,7 +11,7 @@ const PRODUCT_COLLECTIONS = [
   'product_service'
 ];
 
-export default async function ProductDetail(props: { params: { id: string } }) {
+export default async function ProductDetail(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
 
   let product: Product | null = null;
