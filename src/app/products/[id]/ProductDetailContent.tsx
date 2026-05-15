@@ -1,123 +1,127 @@
 // app/products/[id]/ProductDetailContent.tsx
-'use client';
+"use client";
 
-import { Product } from '@/types/product';
-import Image from 'next/image';
-import Header from '@/components/Header';
-import Link from 'next/link';
-import Footer from '@/components/Footer';
+import { Product } from "@/types/product";
+import Image from "next/image";
+import Header from "@/components/Header";
+import Link from "next/link";
+import Footer from "@/components/Footer";
 
-
-export default function ProductDetailContent({ product, sim_products, collectionName }: { product: Product; sim_products: Product[]; collectionName: string; }) {
-    
+export default function ProductDetailContent({
+  product,
+  sim_products,
+}: {
+  product: Product;
+  sim_products: Product[];
+}) {
   return (
+    <main className="min-h-screen relative overflow-hidden">
+      <title>Egg Corporation</title>
 
-      <main className="min-h-screen relative overflow-hidden">
+      <div
+        className="bg-[url('/EggBG.png')] bg-repeat bg-cover w-full h-full absolute inset-0 z-[-10]"
+        style={{
+          backgroundSize: "180%",
+          backgroundPosition: "left -65%",
+        }}
+      />
 
-        <title>Egg Corporation</title>
+      <Image
+        src="/Pic_2.svg"
+        alt="Top Left Decoration"
+        width={256}
+        height={256}
+        className="absolute -top-20 left-20 w-1/6 h-auto rotate-[160deg]"
+      />
 
-          <div
-            className="bg-[url('/EggBG.png')] bg-repeat bg-cover w-full h-full absolute inset-0 z-[-10]"
-            style={{
-              backgroundSize: '180%',
-              backgroundPosition: 'left -65%',
-            }}
-          />
+      <Header />
 
+      <div className="max-w-7xl mx-auto p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Product Image */}
+          <div className="relative h-96 md:h-[500px] bg-[#E1DDD5] bg-opacity-80 rounded-2xl overflow-hidden">
+            <Image
+              src={product.imageUrl}
+              alt={product.name}
+              fill
+              className="object-contain"
+            />
+          </div>
 
-        <img
-          src="/Pic_2.svg"
-          alt="Top Left Decoration"
-          className="absolute -top-20 left-20 w-1/6 h-auto rotate-[160deg]"
-        />
+          {/* Product Details */}
+          <div className="space-y-6">
+            <h1 className="font-kanit text-3xl font-bold text-[#005844]">
+              {product.name}
+            </h1>
 
-        <Header /> 
-
-        <div className="max-w-7xl mx-auto p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                {/* Product Image */}
-                <div className="relative h-96 md:h-[500px] bg-[#E1DDD5] bg-opacity-80 rounded-2xl overflow-hidden">
-                <Image
-                    src={product.imageUrl}
-                    alt={product.name}
-                    fill
-                    className="object-contain"
-                />
-                </div>
-
-                {/* Product Details */}
-                <div className="space-y-6">
-                <h1 className="font-kanit text-3xl font-bold text-[#005844]">
-                    {product.name}
-                </h1>
-                
-                <div className="prose max-w-none">
-                    <p className="font-kanit whitespace-pre-line text-gray-800">
-                    {product.briefDescription}
-                    </p>
-                </div>
-
-                <div className="prose max-w-none">
-                    <h3 className="font-kanit text-2xl font-semibold text-[#005844]">รายละเอียด</h3>
-                    <p className="font-kanit whitespace-pre-line text-gray-800">
-                    {product.fullDescription}
-                    </p>
-                </div>
-
-                <div>
-                    <h3 className="font-kanit text-2xl font-semibold text-[#005844]">ขนาดที่ผลิต</h3>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                    {product.sizes.map((size, index) => (
-                        <span
-                        key={index}
-                        className="font-kanit bg-[#005844] text-white px-4 py-2 rounded-full"
-                        >
-                        {size}
-                        </span>
-                    ))}
-                    </div>
-                </div>
-                </div>
-            </div>
+            <div className="prose max-w-none">
+              <p className="font-kanit whitespace-pre-line text-gray-800">
+                {product.briefDescription}
+              </p>
             </div>
 
-            {sim_products.length > 0 && (
+            <div className="prose max-w-none">
+              <h3 className="font-kanit text-2xl font-semibold text-[#005844]">
+                รายละเอียด
+              </h3>
+              <p className="font-kanit whitespace-pre-line text-gray-800">
+                {product.fullDescription}
+              </p>
+            </div>
 
-            <div className="max-w-7xl mx-auto p-8">
-              <h2 className="font-kanit text-2xl md:text-3xl font-semibold text-[#005844] mb-8">
-                สินค้าที่คล้ายกัน
-              </h2>
-              
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {sim_products.map((product) => (
-                  <Link 
-                    key={product.id}
-                    href={`/products/${product.id}`}
-                    className="group"
+            <div>
+              <h3 className="font-kanit text-2xl font-semibold text-[#005844]">
+                ขนาดที่ผลิต
+              </h3>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {product.sizes.map((size, index) => (
+                  <span
+                    key={index}
+                    className="font-kanit bg-[#005844] text-white px-4 py-2 rounded-full"
                   >
-                    <div className="bg-[#E1DDD5] bg-opacity-30 rounded-xl p-4 h-full flex flex-col shadow-md">
-                      <div className="relative aspect-square mb-4">
-                        <Image
-                          src={product.imageUrl}
-                          alt={product.name}
-                          fill
-                          className="object-contain group-hover:scale-105 transition-transform"
-                        />
-                      </div>
-                      <h3 className="font-kanit text-center text-black font-medium mt-auto">
-                        {product.name}
-                      </h3>
-                    </div>
-                  </Link>
+                    {size}
+                  </span>
                 ))}
               </div>
             </div>
-            )}
+          </div>
+        </div>
+      </div>
 
-            <div className="mt-20"/>
-            <Footer/>
+      {sim_products.length > 0 && (
+        <div className="max-w-7xl mx-auto p-8">
+          <h2 className="font-kanit text-2xl md:text-3xl font-semibold text-[#005844] mb-8">
+            สินค้าที่คล้ายกัน
+          </h2>
 
-      </main>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {sim_products.map((product) => (
+              <Link
+                key={product.id}
+                href={`/products/${product.id}`}
+                className="group"
+              >
+                <div className="bg-[#E1DDD5] bg-opacity-30 rounded-xl p-4 h-full flex flex-col shadow-md">
+                  <div className="relative aspect-square mb-4">
+                    <Image
+                      src={product.imageUrl}
+                      alt={product.name}
+                      fill
+                      className="object-contain group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <h3 className="font-kanit text-center text-black font-medium mt-auto">
+                    {product.name}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
+      <div className="mt-20" />
+      <Footer />
+    </main>
   );
 }
