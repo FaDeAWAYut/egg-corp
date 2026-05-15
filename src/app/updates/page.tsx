@@ -1,13 +1,18 @@
 'use client';
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import React, { useEffect } from "react";
 import Link from "next/link";
 import Lenis from "lenis";
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import Header from '@/components/Header';
+import { getNewsArticles } from '@/lib/news';
+import { NewsArticle } from '@/types/news';
+import Footer from "@/components/Footer";
 
-export default function Home() {
+export default function Updates() {
+  const [articles, setArticles] = useState<NewsArticle[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Smooth scroll
   useEffect(() => {
@@ -19,7 +24,21 @@ export default function Home() {
     requestAnimationFrame(raf);
   }, []);
 
-  // อย่าลืมขอ logo svg
+  // Fetch news articles
+  useEffect(() => {
+    const fetchArticles = async () => {
+      setIsLoading(true);
+      try {
+        const articlesData = await getNewsArticles();
+        setArticles(articlesData);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchArticles();
+  }, []);
 
   return (
     <ParallaxProvider>
@@ -65,9 +84,58 @@ export default function Home() {
           <div className="font-kanit text-[48px] text-black">ข่าวสารและรายละเอียด</div>
         </div>
 
+        {/* News Articles Grid */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-10">
+            {isLoading ? (
+              <div className="flex justify-center items-center h-64">
+                <p className="font-kanit text-4xl text-[#000000]">กำลังโหลดข่าวสาร...</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {articles.map((article) => (
+                  <Link 
+                    key={article.id} 
+                    href={`/updates/${article.id}`}
+                    className="group h-full"
+                  >
+                    
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 group-hover:shadow-lg group-hover:-translate-y-1 h-full flex flex-col">
+                      
+                      <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
+                        <Image
+                          src={article.imageUrl}
+                          alt={article.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      
+                      
+                      <div className="p-4 flex-grow flex flex-col">
+                        
+                        <h3 className="font-kanit text-xl font-semibold text-[#005844] line-clamp-3 flex-grow">
+                          {article.name}
+                        </h3>
+                        
+                        
+                        <p className="font-kanit text-gray-500 mt-2 text-sm">
+                          {new Date(article.timestamp).toLocaleDateString('th-TH', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
 
 
-
+      <div className="mt-20"/>
+      <Footer/>
           
       </main>
 
