@@ -1,7 +1,7 @@
-export interface News {
-    id: string;
-    name: string;
-    imageUrl: string;
-    Description: string;
-    timestamp: Date;
+export interface NewsArticle {
+  id: string;
+  name: string;
+  Description: string;
+  imageUrl: string;
+  timestamp: string;
 }
