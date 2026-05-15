@@ -5,12 +5,20 @@ import Link from "next/link";
 
 interface ProductCardProps {
   product: Product;
+  collectionName?: string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  collectionName,
+}) => {
+  const href = collectionName
+    ? `/products/${product.id}?collection=${collectionName}`
+    : `/products/${product.id}`;
+
   return (
     <Link
-      href={`/products/${product.id}`}
+      href={href}
       className="flex flex-col md:flex-row bg-[#E1DDD5] bg-opacity-30 rounded-3xl shadow-md overflow-hidden mb-10 min-h-80 mx-auto w-[95%]"
       passHref
     >

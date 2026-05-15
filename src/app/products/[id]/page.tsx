@@ -12,23 +12,37 @@ const PRODUCT_COLLECTIONS = [
 
 export default async function ProductDetail({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: { collection?: string };
 }) {
   const { id } = await params;
+  const { collection } = await searchParams;
 
   let product: Product | null = null;
   let collectionName = "";
   let similarProducts: Product[] = [];
 
-  for (const col of PRODUCT_COLLECTIONS) {
-    const docRef = adminDb.doc(`${col}/${id}`);
-    const docSnap = await docRef.get();
+  if (collection && PRODUCT_COLLECTIONS.includes(collection)) {
+    const docSnap = await adminDb.doc(`${collection}/${id}`).get();
 
     if (docSnap.exists) {
       product = { id: docSnap.id, ...(docSnap.data() as any) } as Product;
-      collectionName = col;
-      break;
+      collectionName = collection;
+    }
+  }
+
+  if (!product) {
+    for (const col of PRODUCT_COLLECTIONS) {
+      const docRef = adminDb.doc(`${col}/${id}`);
+      const docSnap = await docRef.get();
+
+      if (docSnap.exists) {
+        product = { id: docSnap.id, ...(docSnap.data() as any) } as Product;
+        collectionName = col;
+        break;
+      }
     }
   }
 

@@ -63,14 +63,30 @@ export default function Home() {
 
   // Define sections data
   const sections = [
-    { id: "bags-section", title: "ถุงพลาสติก", products: productBags },
-    { id: "cups-section", title: "แก้วและฝา", products: productCups },
+    {
+      id: "bags-section",
+      title: "ถุงพลาสติก",
+      products: productBags,
+      collectionName: "product_bag",
+    },
+    {
+      id: "cups-section",
+      title: "แก้วและฝา",
+      products: productCups,
+      collectionName: "product_cuplid",
+    },
     {
       id: "compostable-section",
       title: "ผลิตภัณฑ์ย่อยสลายได้",
       products: productCompostable,
+      collectionName: "product_compostable",
     },
-    { id: "service-section", title: "บริการ OEM", products: productService },
+    {
+      id: "service-section",
+      title: "บริการ OEM",
+      products: productService,
+      collectionName: "product_service",
+    },
   ];
 
   return (
@@ -187,6 +203,7 @@ export default function Home() {
                         <ProductCard
                           key={`${section.id}-${product.id}`}
                           product={product}
+                          collectionName={section.collectionName}
                         />
                       ))}
                     </div>
@@ -207,6 +224,7 @@ export default function Home() {
                         <ProductCard
                           key={`${section.id}-${product.id}`}
                           product={product}
+                          collectionName={section.collectionName}
                         />
                       ))}
                     </div>

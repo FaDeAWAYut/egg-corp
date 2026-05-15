@@ -1,13 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function CategorySelector({
-  selectedCategory,
-}: {
-  selectedCategory: number;
-}) {
+export default function CategorySelector() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedCategory = Number(searchParams.get("category") ?? "0");
 
   return (
     <div className="w-full bg-[#F9F6F1] shadow-[rgba(0,0,12,0.2)_0px_0px_60px_0px] px-10 py-4 relative z-10">

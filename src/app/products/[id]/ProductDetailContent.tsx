@@ -122,7 +122,7 @@ export default function ProductDetailContent({
             {sim_products.map((product) => (
               <Link
                 key={product.id}
-                href={`/products/${product.id}`}
+                href={`/products/${product.id}?collection=${collectionName}`}
                 className="group"
               >
                 <div className="bg-[#E1DDD5] bg-opacity-30 rounded-xl p-4 h-full flex flex-col shadow-md">

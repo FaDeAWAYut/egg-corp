@@ -46,7 +46,7 @@ export default function Home() {
         <TopBanner title="ผลิตภัณฑ์" />
         {/* //category selector here */}
         <div className="h-[30vh]" /> {/* Spacer */}
-        <CategorySelector selectedCategory={selectedCategory} />
+        <CategorySelector />
         {/* Product category banners */}
         <CategoryBanner />
         <Footer />
