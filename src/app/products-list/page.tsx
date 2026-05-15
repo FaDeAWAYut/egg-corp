@@ -15,13 +15,17 @@ import {
 import { Product } from "@/types/product";
 import ProductCard from "@/components/ProductCard";
 import Footer from "@/components/Footer";
+import { useSearchParams, useRouter } from "next/navigation";
+
 export default function Home() {
   const [productBags, setProductBags] = useState<Product[]>([]);
   const [productCups, setProductCups] = useState<Product[]>([]);
   const [productCompostable, setProductCompostable] = useState<Product[]>([]);
   const [productService, setProductService] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
-  const [selectedCategory, setSelectedCategory] = useState(0);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const selectedCategory = Number(searchParams.get("category") ?? "0");
 
   // Smooth scroll
   useEffect(() => {
@@ -31,23 +35,6 @@ export default function Home() {
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-  }, []);
-
-  // Handle URL hash to set selected category
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const hash = window.location.hash;
-      const hashToCategory: { [key: string]: number } = {
-        "#bags-section": 1,
-        "#cups-section": 2,
-        "#compostable-section": 3,
-        "#service-section": 4,
-      };
-      const category = hashToCategory[hash];
-      if (category !== undefined) {
-        setSelectedCategory(category);
-      }
-    }
   }, []);
 
   useEffect(() => {
@@ -137,7 +124,11 @@ export default function Home() {
             ].map((item, index) => (
               <div
                 key={index}
-                onClick={() => setSelectedCategory(index)}
+                onClick={() =>
+                  router.push(`/products-list?category=${index}`, {
+                    scroll: false,
+                  })
+                }
                 className="flex flex-col items-center cursor-pointer py-1.5 relative group"
               >
                 {/* Icon */}
