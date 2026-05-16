@@ -2,7 +2,6 @@ import { adminDb } from "@/lib/firebase-admin";
 import { Product } from "@/types/product";
 import ProductDetailContent from "./ProductDetailContent";
 
-// List all your product collections
 const PRODUCT_COLLECTIONS = [
   "product_bag",
   "product_cuplid",
@@ -25,8 +24,8 @@ export default async function ProductDetail({
   let similarProducts: Product[] = [];
 
   if (collection && PRODUCT_COLLECTIONS.includes(collection)) {
+    // Known collection — single fetch, fast path
     const docSnap = await adminDb.doc(`${collection}/${id}`).get();
-
     if (docSnap.exists) {
       product = { id: docSnap.id, ...(docSnap.data() as any) } as Product;
       collectionName = collection;
@@ -34,19 +33,30 @@ export default async function ProductDetail({
   }
 
   if (!product) {
-    for (const col of PRODUCT_COLLECTIONS) {
-      const docRef = adminDb.doc(`${col}/${id}`);
-      const docSnap = await docRef.get();
+    // Fetch ALL collections simultaneously instead of one by one
+    const results = await Promise.all(
+      PRODUCT_COLLECTIONS.map(async (col) => {
+        const docSnap = await adminDb.doc(`${col}/${id}`).get();
+        return docSnap.exists
+          ? {
+              product: {
+                id: docSnap.id,
+                ...(docSnap.data() as any),
+              } as Product,
+              col,
+            }
+          : null;
+      }),
+    );
 
-      if (docSnap.exists) {
-        product = { id: docSnap.id, ...(docSnap.data() as any) } as Product;
-        collectionName = col;
-        break;
-      }
+    const found = results.find(Boolean);
+    if (found) {
+      product = found.product;
+      collectionName = found.col;
     }
   }
 
-  // Fetch similar products if product found
+  // Fetch similar products concurrently with nothing (already have product)
   if (product) {
     const qSnap = await adminDb
       .collection(collectionName)
@@ -69,12 +79,10 @@ export default async function ProductDetail({
   }
 
   return (
-    <>
-      <ProductDetailContent
-        product={product}
-        sim_products={similarProducts}
-        collectionName={collectionName}
-      />
-    </>
+    <ProductDetailContent
+      product={product}
+      sim_products={similarProducts}
+      collectionName={collectionName}
+    />
   );
 }
