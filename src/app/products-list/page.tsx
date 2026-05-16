@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import Lenis from "lenis";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 import Header from "@/components/Header";
@@ -30,7 +29,7 @@ export default function Home() {
   // Smooth scroll
   useEffect(() => {
     const lenis = new Lenis();
-    function raf(time: any) {
+    function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
@@ -119,9 +118,11 @@ export default function Home() {
           </h1>
         </div>
 
-        <img
+        <Image
           src="/Pic_2.svg"
           alt="Top Left Decoration"
+          width={256}
+          height={256}
           className="absolute -top-20 left-20 w-1/6 h-auto rotate-[160deg]"
         />
 

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const pathname = usePathname();
@@ -14,42 +14,46 @@ const Header = () => {
     <header className="h-[120px] bg-transparent">
       <nav className="flex justify-center items-center h-full px-5">
         <div className="relative flex items-center justify-center space-x-20">
-          <a
+          <Link
             href="/"
-            className={`${linkBaseStyle} after:left-0 ${pathname === '/' ? 'after:w-full' : 'after:left-1/2 after:w-0 hover:after:w-full hover:after:left-0'}`}
+            className={`${linkBaseStyle} after:left-0 ${pathname === "/" ? "after:w-full" : "after:left-1/2 after:w-0 hover:after:w-full hover:after:left-0"}`}
           >
             เกี่ยวกับเรา
-          </a>
-          <a
+          </Link>
+          <Link
             href="/products-list"
-            className={`${linkBaseStyle} after:left-0 ${pathname === '/products-category' || pathname === '/products-list' ? 'after:w-full' : 'after:left-1/2 after:w-0 hover:after:w-full hover:after:left-0'}`}
+            className={`${linkBaseStyle} after:left-0 ${pathname === "/products-category" || pathname === "/products-list" ? "after:w-full" : "after:left-1/2 after:w-0 hover:after:w-full hover:after:left-0"}`}
           >
             ผลิตภัณฑ์
-          </a>
+          </Link>
           <div>
             <Image src="/main_logo.png" width={80} height={80} alt="Logo" />
           </div>
-          <a
+          <Link
             href="/updates"
-            className={`${linkBaseStyle} after:left-0 ${pathname === '/updates' ? 'after:w-full' : 'after:left-1/2 after:w-0 hover:after:w-full hover:after:left-0'}`}
+            className={`${linkBaseStyle} after:left-0 ${pathname === "/updates" ? "after:w-full" : "after:left-1/2 after:w-0 hover:after:w-full hover:after:left-0"}`}
           >
             ข่าวสาร
-          </a>
-          <a
+          </Link>
+          <Link
             href="/contact-us"
-            className={`${linkBaseStyle} after:left-0 ${pathname === '/contact-us' ? 'after:w-full' : 'after:left-1/2 after:w-0 hover:after:w-full hover:after:left-0'}`}
+            className={`${linkBaseStyle} after:left-0 ${pathname === "/contact-us" ? "after:w-full" : "after:left-1/2 after:w-0 hover:after:w-full hover:after:left-0"}`}
           >
             ติดต่อเรา
-          </a>
+          </Link>
         </div>
         <div className="absolute right-5 flex space-x-5">
           <div className="w-[47px] h-[47px] overflow-hidden transform translate-y-0">
-            <Link href="https://www.facebook.com/EGGbiopak" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://www.facebook.com/EGGbiopak"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Image
                 src="/facebook_svg.svg"
                 width={100}
                 height={100}
-                style={{ objectFit: 'contain' }}
+                style={{ objectFit: "contain" }}
                 alt="Facebook Icon"
               />
             </Link>

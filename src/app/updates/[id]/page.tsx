@@ -1,8 +1,10 @@
-import { adminDb } from "@/lib/firebase-admin";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import { NewsArticle } from "@/types/news";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { adminDb } from "@/lib/firebase-admin";
 
 export default async function NewsDetail({
   params,
@@ -38,9 +40,11 @@ export default async function NewsDetail({
         }}
       />
 
-      <img
+      <Image
         src="/Pic_2.svg"
         alt="Top Left Decoration"
+        width={256}
+        height={256}
         className="absolute -top-20 left-20 w-1/6 h-auto rotate-[160deg]"
       />
 

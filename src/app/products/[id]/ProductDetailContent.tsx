@@ -18,7 +18,6 @@ export default function ProductDetailContent({
   collectionName: string;
 }) {
   const router = useRouter();
-
   return (
     <main className="min-h-screen relative overflow-hidden">
       <title>Egg Corporation</title>

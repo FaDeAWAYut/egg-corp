@@ -17,7 +17,7 @@ export default function Updates() {
   // Smooth scroll
   useEffect(() => {
     const lenis = new Lenis();
-    function raf(time: any) {
+    function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
@@ -70,9 +70,11 @@ export default function Updates() {
           </h1>
         </div>
 
-        <img
+        <Image
           src="/Pic_2.svg"
           alt="Top Left Decoration"
+          width={256}
+          height={256}
           className="absolute -top-20 left-20 w-1/6 h-auto rotate-[160deg]"
         />
 
