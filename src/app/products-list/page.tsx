@@ -14,12 +14,17 @@ import {
 import { Product } from "@/types/product";
 import ProductCard from "@/components/ProductCard";
 import Footer from "@/components/Footer";
+import { useSearchParams, useRouter } from "next/navigation";
+
 export default function Home() {
   const [productBags, setProductBags] = useState<Product[]>([]);
   const [productCups, setProductCups] = useState<Product[]>([]);
   const [productCompostable, setProductCompostable] = useState<Product[]>([]);
   const [productService, setProductService] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const selectedCategory = Number(searchParams.get("category") ?? "0");
 
   // Smooth scroll
   useEffect(() => {
@@ -54,6 +59,34 @@ export default function Home() {
     };
     fetchProducts();
   }, []);
+
+  // Define sections data
+  const sections = [
+    {
+      id: "bags-section",
+      title: "ถุงพลาสติก",
+      products: productBags,
+      collectionName: "product_bag",
+    },
+    {
+      id: "cups-section",
+      title: "แก้วและฝา",
+      products: productCups,
+      collectionName: "product_cuplid",
+    },
+    {
+      id: "compostable-section",
+      title: "ผลิตภัณฑ์ย่อยสลายได้",
+      products: productCompostable,
+      collectionName: "product_compostable",
+    },
+    {
+      id: "service-section",
+      title: "บริการ OEM",
+      products: productService,
+      collectionName: "product_service",
+    },
+  ];
 
   return (
     <ParallaxProvider>
@@ -97,105 +130,42 @@ export default function Home() {
 
         <div className="h-[30vh]" />
 
-        <div className="w-full bg-[#F9F6F1] shadow-[rgba(0,0,12,0.2)_0px_0px_60px_0px] px-10 py-6 relative z-10">
-          <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-            {/* Plastic Bags */}
-            <div className="flex flex-col items-center w-[150px]">
-              {" "}
-              {/* Fixed width container */}
-              <button
+        <div className="w-full bg-[#F9F6F1] shadow-[rgba(0,0,12,0.2)_0px_0px_60px_0px] px-10 py-4 relative z-10">
+          <div className="flex justify-center px-20 gap-14">
+            {[
+              { icon: "/home-button.png", label: "สินค้าทั้งหมด" },
+              { icon: "/plastic-bag-icon.png", label: "ถุงพลาสติก" },
+              { icon: "/coffee-cup-icon.png", label: "แก้วและฝา" },
+              { icon: "/dish-icon.png", label: "ผลิตภัณฑ์ EGG" },
+              { icon: "/leaves-icon.png", label: "บริการ OEM" },
+            ].map((item, index) => (
+              <div
+                key={index}
                 onClick={() =>
-                  document
-                    .getElementById("bags-section")
-                    ?.scrollIntoView({ behavior: "smooth" })
+                  router.push(`/products-list?category=${index}`, {
+                    scroll: false,
+                  })
                 }
-                className="flex flex-col items-center group w-full"
+                className="flex flex-col items-center cursor-pointer py-1.5 relative group"
               >
-                <div className="w-12 h-12 md:w-16 md:h-16 relative">
-                  <Image
-                    src="/plastic-bag-icon.png"
-                    alt="ถุงพลาสติก"
-                    fill
-                    className="object-contain transition-transform group-hover:scale-110"
-                  />
-                </div>
-                <p className="font-kanit text-l md:text-xl mt-2 text-black text-center w-full">
-                  ถุงพลาสติก
-                </p>
-              </button>
-            </div>
+                {/* Icon */}
+                <img
+                  src={item.icon}
+                  alt={item.label}
+                  className="w-12 h-12 mb-2 transition-transform duration-200 group-hover:scale-110"
+                />
 
-            {/* Cups & Lids */}
-            <div className="flex flex-col items-center w-[150px]">
-              <button
-                onClick={() =>
-                  document
-                    .getElementById("cups-section")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="flex flex-col items-center group w-full"
-              >
-                <div className="w-12 h-12 md:w-16 md:h-16 relative">
-                  <Image
-                    src="/coffee-cup-icon.png"
-                    alt="แก้วและฝา"
-                    fill
-                    className="object-contain transition-transform group-hover:scale-110"
-                  />
-                </div>
-                <p className="font-kanit text-l md:text-xl mt-2 text-black text-center w-full">
-                  แก้วและฝา
-                </p>
-              </button>
-            </div>
+                {/* Text */}
+                <span className="font-kanit text-md text-black text-center px-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                  {item.label}
+                </span>
 
-            {/* Compostable */}
-            <div className="flex flex-col items-center w-[150px]">
-              <button
-                onClick={() =>
-                  document
-                    .getElementById("compostable-section")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="flex flex-col items-center group w-full"
-              >
-                <div className="w-12 h-12 md:w-16 md:h-16 relative">
-                  <Image
-                    src="/dish-icon.png"
-                    alt="ผลิตภัณฑ์ EGG"
-                    fill
-                    className="object-contain transition-transform group-hover:scale-110"
-                  />
-                </div>
-                <p className="font-kanit text-l md:text-xl mt-2 text-black text-center w-full leading-tight">
-                  ผลิตภัณฑ์ EGG
-                </p>
-              </button>
-            </div>
-
-            {/* OEM Service */}
-            <div className="flex flex-col items-center w-[150px]">
-              <button
-                onClick={() =>
-                  document
-                    .getElementById("service-section")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="flex flex-col items-center group w-full"
-              >
-                <div className="w-12 h-12 md:w-16 md:h-16 relative">
-                  <Image
-                    src="/leaves-icon.png"
-                    alt="บริการ OEM"
-                    fill
-                    className="object-contain transition-transform group-hover:scale-110"
-                  />
-                </div>
-                <p className="font-kanit text-l md:text-xl mt-2 text-black text-center w-full">
-                  บริการ OEM
-                </p>
-              </button>
-            </div>
+                {/* Underline */}
+                <div
+                  className={`absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-28 h-1 bg-black transition-transform duration-300 origin-center ${selectedCategory === index ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                />
+              </div>
+            ))}
           </div>
         </div>
 
@@ -211,58 +181,58 @@ export default function Home() {
         {/* Conditionally render content */}
         {!isLoading && (
           <>
-            {/* Plastic Bag Section */}
-            <div
-              id="bags-section"
-              className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10"
-            >
-              ถุงพลาสติก
-            </div>
+            {selectedCategory === 0 ? (
+              // Show all sections
+              <>
+                <div className="flex flex-col items-center justify-center my-20 w-fit mx-auto">
+                  <span className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold text-center">
+                    All Products
+                  </span>
+                  <div className="w-full h-1.5 bg-[#005844]"></div>
+                </div>
 
-            <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10">
-              {productBags.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-
-            {/* Cups & Lids Section */}
-            <div
-              id="cups-section"
-              className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10"
-            >
-              แก้วและฝา
-            </div>
-            <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
-              {productCups.map((product) => (
-                <ProductCard key={`cup-${product.id}`} product={product} />
-              ))}
-            </div>
-
-            {/* Compostable Section */}
-            <div
-              id="compostable-section"
-              className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10"
-            >
-              ผลิตภัณฑ์ย่อยสลายได้
-            </div>
-            <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
-              {productCompostable.map((product) => (
-                <ProductCard key={`cup-${product.id}`} product={product} />
-              ))}
-            </div>
-
-            {/* OEM Service Section */}
-            <div
-              id="service-section"
-              className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10"
-            >
-              บริการ OEM
-            </div>
-            <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
-              {productService.map((product) => (
-                <ProductCard key={`cup-${product.id}`} product={product} />
-              ))}
-            </div>
+                {sections.map((section, index) => (
+                  <React.Fragment key={section.id}>
+                    <div
+                      id={section.id}
+                      className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10"
+                    >
+                      {section.title}
+                    </div>
+                    <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
+                      {section.products.map((product) => (
+                        <ProductCard
+                          key={`${section.id}-${product.id}`}
+                          product={product}
+                          collectionName={section.collectionName}
+                        />
+                      ))}
+                    </div>
+                  </React.Fragment>
+                ))}
+              </>
+            ) : (
+              // Show only selected category
+              (() => {
+                const section = sections[selectedCategory - 1];
+                return (
+                  <>
+                    <div className="font-kanit text-[50px] sm:text-[60px] text-[#005844] font-semibold mx-auto max-w-[80%] mt-20 text-center md:text-left 2xl:pl-20 md:pl-10 2xl:pr-20 md:pr-10">
+                      {section.title}
+                    </div>
+                    <div className="grid grid-cols-1 2xl:grid-cols-2 mx-auto max-w-[80%] mt-5 2xl:pl-10 2xl:pr-10 mb-20">
+                      {section.products.map((product) => (
+                        <ProductCard
+                          key={`${section.id}-${product.id}`}
+                          product={product}
+                          collectionName={section.collectionName}
+                        />
+                      ))}
+                    </div>
+                  </>
+                );
+              })()
+            )}
           </>
         )}
 

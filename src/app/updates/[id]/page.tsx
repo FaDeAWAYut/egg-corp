@@ -4,6 +4,7 @@ import { NewsArticle } from "@/types/news";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { adminDb } from "@/lib/firebase-admin";
 
 export default async function NewsDetail({
   params,
@@ -11,14 +12,15 @@ export default async function NewsDetail({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const docRef = doc(db, "news", id);
-  const docSnap = await getDoc(docRef);
 
-  if (!docSnap.exists()) {
+  const docRef = adminDb.doc(`news/${id}`);
+  const docSnap = await docRef.get();
+
+  if (!docSnap.exists) {
     return <div>Article not found</div>;
   }
 
-  const data = docSnap.data();
+  const data = docSnap.data() as any;
   const article: NewsArticle = {
     id: docSnap.id,
     name: data.name,
