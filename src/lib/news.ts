@@ -1,11 +1,5 @@
-import {
-  collection,
-  getDocs,
-  orderBy,
-  query,
-  Timestamp,
-} from "firebase/firestore";
-import { db } from "./firebase";
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { db } from './firebase';
 
 export interface NewsArticle {
   id: string;
@@ -16,10 +10,10 @@ export interface NewsArticle {
 }
 
 export const getNewsArticles = async (): Promise<NewsArticle[]> => {
-  const q = query(collection(db, "news"), orderBy("timestamp", "desc"));
+  const q = query(collection(db, 'news'), orderBy('timestamp', 'desc'));
   const querySnapshot = await getDocs(q);
 
-  return querySnapshot.docs.map((doc) => {
+  return querySnapshot.docs.map(doc => {
     const data = doc.data();
     return {
       id: doc.id,

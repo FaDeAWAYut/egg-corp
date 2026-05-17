@@ -1,7 +1,17 @@
-import { adminDb } from "@/lib/firebase-admin";
+import {
+  getDoc,
+  doc,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import { Product } from "@/types/product";
 import ProductDetailContent from "./ProductDetailContent";
 
+// List all your product collections
 const PRODUCT_COLLECTIONS = [
   "product_bag",
   "product_cuplid",
@@ -9,65 +19,49 @@ const PRODUCT_COLLECTIONS = [
   "product_service",
 ];
 
-export default async function ProductDetail({
-  params,
-  searchParams,
-}: {
+export default async function ProductDetail(props: {
   params: Promise<{ id: string }>;
-  searchParams: { collection?: string };
 }) {
-  const { id } = await params;
-  const { collection } = await searchParams;
+  const { id } = await props.params;
 
   let product: Product | null = null;
   let collectionName = "";
   let similarProducts: Product[] = [];
 
-  if (collection && PRODUCT_COLLECTIONS.includes(collection)) {
-    // Known collection — single fetch, fast path
-    const docSnap = await adminDb.doc(`${collection}/${id}`).get();
-    if (docSnap.exists) {
-      product = { id: docSnap.id, ...(docSnap.data() as any) } as Product;
+  for (const collection of PRODUCT_COLLECTIONS) {
+    const docRef = doc(db, collection, id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      product = {
+        id: docSnap.id,
+        ...docSnap.data(),
+      } as Product;
       collectionName = collection;
+      break;
     }
   }
 
-  if (!product) {
-    // Fetch ALL collections simultaneously instead of one by one
-    const results = await Promise.all(
-      PRODUCT_COLLECTIONS.map(async (col) => {
-        const docSnap = await adminDb.doc(`${col}/${id}`).get();
-        return docSnap.exists
-          ? {
-              product: {
-                id: docSnap.id,
-                ...(docSnap.data() as any),
-              } as Product,
-              col,
-            }
-          : null;
-      }),
+  // Fetch similar products if product found
+  if (product) {
+    const productsRef = collection(db, collectionName);
+    const q = query(
+      productsRef,
+      orderBy("order"),
+      limit(6), // Get one extra in case current product is in the first 5
     );
 
-    const found = results.find(Boolean);
-    if (found) {
-      product = found.product;
-      collectionName = found.col;
-    }
-  }
-
-  // Fetch similar products concurrently with nothing (already have product)
-  if (product) {
-    const qSnap = await adminDb
-      .collection(collectionName)
-      .orderBy("order")
-      .limit(6)
-      .get();
-
-    similarProducts = qSnap.docs
-      .map((d) => ({ id: d.id, ...(d.data() as any) }) as Product)
-      .filter((p) => p.id !== product?.id)
-      .slice(0, 5);
+    const querySnapshot = await getDocs(q);
+    similarProducts = querySnapshot.docs
+      .map(
+        (doc) =>
+          ({
+            id: doc.id,
+            ...doc.data(),
+          }) as Product,
+      )
+      .filter((p) => p.id !== product?.id) // Exclude current product
+      .slice(0, 5); // Take first 5 after filtering
   }
 
   if (!product) {
@@ -79,10 +73,8 @@ export default async function ProductDetail({
   }
 
   return (
-    <ProductDetailContent
-      product={product}
-      sim_products={similarProducts}
-      collectionName={collectionName}
-    />
+    <>
+      <ProductDetailContent product={product} sim_products={similarProducts} />
+    </>
   );
 }
