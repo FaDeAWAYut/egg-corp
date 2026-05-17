@@ -14,7 +14,7 @@ export default async function ProductDetail({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: { collection?: string };
+  searchParams: Promise<{ collection?: string }>;
 }) {
   const { id } = await params;
   const { collection } = await searchParams;
@@ -27,7 +27,8 @@ export default async function ProductDetail({
     // Known collection — single fetch, fast path
     const docSnap = await adminDb.doc(`${collection}/${id}`).get();
     if (docSnap.exists) {
-      product = { id: docSnap.id, ...(docSnap.data() as any) } as Product;
+      const data = docSnap.data() as Omit<Product, "id">;
+      product = { id: docSnap.id, ...data };
       collectionName = collection;
     }
   }
@@ -41,8 +42,8 @@ export default async function ProductDetail({
           ? {
               product: {
                 id: docSnap.id,
-                ...(docSnap.data() as any),
-              } as Product,
+                ...(docSnap.data() as Omit<Product, "id">),
+              },
               col,
             }
           : null;
@@ -65,7 +66,9 @@ export default async function ProductDetail({
       .get();
 
     similarProducts = qSnap.docs
-      .map((d) => ({ id: d.id, ...(d.data() as any) }) as Product)
+      .map(
+        (d) => ({ id: d.id, ...(d.data() as Omit<Product, "id">) }) as Product,
+      )
       .filter((p) => p.id !== product?.id)
       .slice(0, 5);
   }

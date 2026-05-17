@@ -136,9 +136,9 @@ export default function Home() {
               <Image
                 src="/Pic_1.jpg"
                 alt="Pic1"
-                layout="fill"
-                objectFit="cover"
-                className="absolute top-0 left-0 opacity-30 blur-sm z-0"
+                width={1600}
+                height={900}
+                className="absolute top-0 left-0 opacity-30 blur-sm z-0 w-full h-full object-cover"
               />
               <div className="relative z-10">
                 <div className="flex pt-10 justify-center">
@@ -456,9 +456,9 @@ export default function Home() {
             <Image
               src="/Pic_1.jpg"
               alt="Pic1"
-              layout="fill"
-              objectFit="cover"
-              className="absolute top-0 left-0 opacity-30 blur-sm z-0"
+              width={1600}
+              height={900}
+              className="absolute top-0 left-0 opacity-30 blur-sm z-0 w-full h-full object-cover"
             />
             <div className="relative z-10 flex flex-col justify-center items-center">
               <a className="font-kanit font-semibold text-[86px] text-[#005844] pt-10">

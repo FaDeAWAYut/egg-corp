@@ -1,5 +1,3 @@
-import { getDoc, doc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 import { NewsArticle } from "@/types/news";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -20,7 +18,12 @@ export default async function NewsDetail({
     return <div>Article not found</div>;
   }
 
-  const data = docSnap.data() as any;
+  const data = docSnap.data() as {
+    name: string;
+    Description: string;
+    imageUrl: string;
+    timestamp: { toDate(): Date };
+  };
   const article: NewsArticle = {
     id: docSnap.id,
     name: data.name,
@@ -66,8 +69,9 @@ export default async function NewsDetail({
             <Image
               src={article.imageUrl}
               alt={article.name}
-              fill
-              className="object-cover"
+              width={1600}
+              height={900}
+              className="object-cover w-full h-full"
             />
           </div>
           <div className="font-kanit text-xl whitespace-pre-line text-gray-800 leading-relaxed">

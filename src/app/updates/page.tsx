@@ -109,8 +109,9 @@ export default function Updates() {
                       <Image
                         src={article.imageUrl}
                         alt={article.name}
-                        fill
-                        className="object-cover"
+                        width={600}
+                        height={340}
+                        className="object-cover w-full h-full"
                       />
                     </div>
 
