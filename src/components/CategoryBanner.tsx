@@ -5,25 +5,25 @@ export default function CategoryBanner() {
   // Banner data with descriptions
   const bannerData = [
     {
-      href: "/products-list#bags-section",
+      href: "/products-list?category=1",
       image: "/EGG_banner.png",
       title: "ถุงพลาสติก",
       description: "ถุงพลาสติกคุณภาพสูงสำหรับบรรจุภัณฑ์สินค้าของคุณ",
     },
     {
-      href: "/products-list#cups-section",
+      href: "/products-list?category=2",
       image: "/EGG_banner.png",
       title: "แก้วและฝา",
       description: "แก้วและฝากาแฟและเครื่องดื่มต่างๆ",
     },
     {
-      href: "/products-list#compostable-section",
+      href: "/products-list?category=3",
       image: "/EGG_banner.png",
       title: "ผลิตภัณฑ์ย่อยสลายได้",
       description: "ผลิตภัณฑ์ที่เป็นมิตรต่อสิ่งแวดล้อมและย่อยสลายได้",
     },
     {
-      href: "/products-list#service-section",
+      href: "/products-list?category=4",
       image: "/EGG_banner.png",
       title: "บริการ OEM",
       description: "บริการออกแบบและผลิตตามความต้องการของคุณ",

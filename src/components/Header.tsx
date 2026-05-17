@@ -21,7 +21,7 @@ const Header = () => {
             เกี่ยวกับเรา
           </Link>
           <Link
-            href="/products-list"
+            href="/products-category"
             className={`${linkBaseStyle} after:left-0 ${pathname === "/products-category" || pathname === "/products-list" ? "after:w-full" : "after:left-1/2 after:w-0 hover:after:w-full hover:after:left-0"}`}
           >
             ผลิตภัณฑ์
