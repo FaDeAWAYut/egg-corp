@@ -17,7 +17,7 @@ const db = isNewApp
       experimentalForceLongPolling: true,
       experimentalAutoDetectLongPolling: false,
       useFetchStreams: false,
-    } as any)
+    } as Parameters<typeof initializeFirestore>[1])
   : getFirestore(app);
 
 export { db };

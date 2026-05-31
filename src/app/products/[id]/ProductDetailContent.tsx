@@ -30,8 +30,10 @@ export default function ProductDetailContent({
         }}
       />
 
-      <img
+      <Image
         src="/Pic_2.svg"
+        width={256}
+        height={256}
         alt="Top Left Decoration"
         className="absolute -top-20 left-20 w-1/6 h-auto rotate-[160deg]"
       />
@@ -66,8 +68,9 @@ export default function ProductDetailContent({
             <Image
               src={product.imageUrl}
               alt={product.name}
-              fill
-              className="object-contain"
+              width={800}
+              height={500}
+              className="object-contain w-full h-full"
             />
           </div>
 
@@ -129,8 +132,9 @@ export default function ProductDetailContent({
                     <Image
                       src={product.imageUrl}
                       alt={product.name}
-                      fill
-                      className="object-contain group-hover:scale-105 transition-transform"
+                      width={400}
+                      height={400}
+                      className="object-contain w-full h-full group-hover:scale-105 transition-transform"
                     />
                   </div>
                   <h3 className="font-kanit text-center text-black font-medium mt-auto">

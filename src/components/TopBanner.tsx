@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function TopBanner({ title }: { title?: string }) {
   return (
     <div className="absolute top-0 left-0 w-full z-[-6] h-[50vh] overflow-hidden bg-[#fafeff]">
@@ -14,8 +16,10 @@ export default function TopBanner({ title }: { title?: string }) {
         </h1>
       </div>
 
-      <img
+      <Image
         src="/Pic_2.svg"
+        width={256}
+        height={256}
         alt="Top Left Decoration"
         className="absolute -top-20 left-20 w-1/6 h-auto rotate-[160deg]"
       />
