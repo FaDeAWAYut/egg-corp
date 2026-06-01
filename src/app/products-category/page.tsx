@@ -1,11 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import React, { Suspense, useEffect } from "react";
 import Lenis from "lenis";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
-import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CategorySelector from "@/components/CategorySelector";
@@ -13,8 +10,6 @@ import CategoryBanner from "@/components/CategoryBanner";
 import TopBanner from "@/components/TopBanner";
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-
   // Smooth scroll
   useEffect(() => {
     const lenis = new Lenis();
@@ -46,7 +41,15 @@ export default function Home() {
         <TopBanner title="ผลิตภัณฑ์" />
         {/* //category selector here */}
         <div className="h-[30vh]" /> {/* Spacer */}
-        <CategorySelector />
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center py-10">
+              <p className="font-kanit text-xl">Loading categories...</p>
+            </div>
+          }
+        >
+          <CategorySelector />
+        </Suspense>
         {/* Product category banners */}
         <CategoryBanner />
         <Footer />

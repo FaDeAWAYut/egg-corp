@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -48,9 +49,11 @@ export default function CategoryBanner() {
             href={banner.href}
             className="block relative group overflow-hidden rounded-lg"
           >
-            <img
+            <Image
               src={banner.image}
               alt={banner.title}
+              width={1200}
+              height={160}
               className="w-full h-40 object-cover shadow-md group-hover:scale-[1.02] transition-transform"
             />
 

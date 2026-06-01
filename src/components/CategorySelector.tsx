@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function CategorySelector() {
@@ -24,9 +25,11 @@ export default function CategorySelector() {
             }
             className="flex flex-col items-center cursor-pointer py-1.5 relative group"
           >
-            <img
+            <Image
               src={item.icon}
               alt={item.label}
+              width={48}
+              height={48}
               className="w-12 h-12 mb-2 transition-transform duration-200 group-hover:scale-110"
             />
             <span className="font-kanit text-md text-black text-center px-2 whitespace-nowrap overflow-hidden text-ellipsis">
