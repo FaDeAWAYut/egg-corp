@@ -542,41 +542,47 @@ export default function Home() {
 
             <div className="absolute inset-x-0 bottom-0 h-[calc(100vh-10rem)]">
               <div className="flex flex-row h-[calc(100vh-10rem)] items-center justify-evenly">
-                <div className="flex flex-col">
+                <a
+                  href="https://www.porsiriplastic.com/"
+                  className="flex flex-col items-center text-center"
+                >
                   <Image
-                    src="/PlaceHolder.png"
+                    src="/PSIRIPLASTIC_logo.png"
                     width={295}
                     height={295}
                     alt="PH"
                   />
-                  <a className="flex justify-center font-kanit text-[48px] text-black -translate-y-5 pt-10">
+                  <span className="flex justify-center font-kanit text-[48px] text-black -translate-y-5 pt-10">
                     Porsiri Plastic
-                  </a>
-                </div>
+                  </span>
+                </a>
 
-                <div className="flex flex-col">
+                <a
+                  href="https://www.eggbiopak.com/home"
+                  className="flex flex-col items-center text-center"
+                >
                   <Image
-                    src="/PlaceHolder.png"
+                    src="/LOGO EGG.png"
                     width={295}
                     height={295}
                     alt="PH"
                   />
-                  <a className="flex justify-center font-kanit text-[48px] text-black -translate-y-5 pt-10">
+                  <span className="flex justify-center font-kanit text-[48px] text-black -translate-y-5 pt-10">
                     Egg Biopak
-                  </a>
-                </div>
+                  </span>
+                </a>
 
-                <div className="flex flex-col">
+                {/* <a href="#" className="flex flex-col items-center text-center">
                   <Image
                     src="/PlaceHolder.png"
                     width={295}
                     height={295}
                     alt="PH"
                   />
-                  <a className="flex justify-center font-kanit text-[48px] text-black -translate-y-5 pt-10">
+                  <span className="flex justify-center font-kanit text-[48px] text-black -translate-y-5 pt-10">
                     Lidstory
-                  </a>
-                </div>
+                  </span>
+                </a> */}
               </div>
             </div>
           </section>

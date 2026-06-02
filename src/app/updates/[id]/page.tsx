@@ -2,6 +2,7 @@ import { NewsArticle } from "@/types/news";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BackButton from "@/components/BackButton";
 import { adminDb } from "@/lib/firebase-admin";
 
 export default async function NewsDetail({
@@ -54,6 +55,7 @@ export default async function NewsDetail({
       <Header />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
+        <BackButton />
         <article className="prose prose-lg max-w-none">
           <h1 className="font-kanit text-4xl font-semibold text-[#005844] text-center pb-5">
             {article.name}

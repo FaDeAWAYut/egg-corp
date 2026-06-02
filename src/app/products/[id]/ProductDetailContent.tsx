@@ -127,7 +127,7 @@ export default function ProductDetailContent({
                 href={`/products/${product.id}?collection=${collectionName}`}
                 className="group"
               >
-                <div className="bg-[#E1DDD5] bg-opacity-30 rounded-xl p-4 h-full flex flex-col shadow-md">
+                <div className="bg-beige bg-opacity-30 rounded-xl p-4 h-full flex flex-col shadow-md">
                   <div className="relative aspect-square mb-4">
                     <Image
                       src={product.imageUrl}

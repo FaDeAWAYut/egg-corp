@@ -42,8 +42,8 @@ const Header = () => {
             ติดต่อเรา
           </Link>
         </div>
-        <div className="absolute right-5 flex space-x-5">
-          <div className="w-[47px] h-[47px] overflow-hidden transform translate-y-0">
+        <div className="absolute right-5 flex space-x-5 items-center">
+          <div className="w-[47px] h-[47px] flex items-center justify-center overflow-hidden transform translate-y-0">
             <Link
               href="https://www.facebook.com/EGGbiopak"
               target="_blank"
@@ -53,12 +53,26 @@ const Header = () => {
                 src="/facebook_svg.svg"
                 width={100}
                 height={100}
-                style={{ objectFit: "contain" }}
+                className="object-contain w-full h-full"
                 alt="Facebook Icon"
               />
             </Link>
           </div>
-          <Image src="/line_svg.svg" width={40} height={40} alt="Line Icon" />
+          <div className="w-[40px] h-[40px] flex items-center justify-center overflow-hidden transform translate-y-0">
+            <Link
+              href="https://line.me/ti/p/@eggbiopak"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="/line_svg.svg"
+                width={100}
+                height={100}
+                className="object-contain w-full h-full"
+                alt="Line Icon"
+              />
+            </Link>
+          </div>
         </div>
       </nav>
     </header>

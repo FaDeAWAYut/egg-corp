@@ -85,14 +85,14 @@ export default function Home() {
           99, 2 ต.คลองมะเดื่อ อ.กระทุ่มแบน จ.สมุทรสาคร 74110
           <div className="mt-4" />
           <span className="font-semibold text-black">เบอร์ติดต่อ : </span>
-          <span className="font-extralight text-[#005844]">000-000-0000</span>
+          <span className="font-extralight text-[#005844]">093-936-6598</span>
           <span className="ml-8 font-semibold text-black">อีเมล : </span>
           <span className="font-extralight text-[#005844]">
-            example@gmail.com
+            eggbiopak@gmail.com
           </span>
           <div className="mt-4" />
           <span className="font-semibold text-black">LineID : </span>
-          <span className="font-extralight text-[#005844]">place@holder</span>
+          <span className="font-extralight text-[#005844]">@eggbiopak</span>
           <div className="mt-4" />
           <span className="font-semibold text-black">Facebook : </span>
           <a

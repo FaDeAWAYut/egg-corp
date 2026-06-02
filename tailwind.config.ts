@@ -8,15 +8,16 @@ export default {
   ],
   theme: {
     fontFamily: {
-      "kanit": ["Kanit", "sans-serif"],
+      kanit: ["Kanit", "sans-serif"],
     },
     extend: {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        'purple': '#6B6AFF',
-        'red': '#F4656A',
-        'red-100': '#FC545A',
+        beige: "#D2C3AF",
+        purple: "#6B6AFF",
+        red: "#F4656A",
+        "red-100": "#FC545A",
       },
     },
   },

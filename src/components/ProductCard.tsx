@@ -19,8 +19,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <Link
       href={href}
-      className="flex flex-col md:flex-row bg-[#E1DDD5] bg-opacity-30 rounded-3xl shadow-md overflow-hidden mb-10 min-h-80 mx-auto w-[95%]"
-      passHref
+      className="flex flex-col md:flex-row bg-[#D2C3AF] bg-opacity-40 rounded-3xl shadow-md overflow-hidden mb-10 min-h-80 mx-auto w-[95%]"
+      passHref // originally E1DDD5
     >
       {/* Image container - full width on mobile, 1/3 on larger screens */}
       <div className="flex w-full md:w-1/3 h-full relative items-center justify-center">
