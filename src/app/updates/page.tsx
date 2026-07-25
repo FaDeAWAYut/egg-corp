@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import { getNewsArticles } from "@/lib/news";
 import { NewsArticle } from "@/types/news";
 import Footer from "@/components/Footer";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function Updates() {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
@@ -140,6 +141,7 @@ export default function Updates() {
 
         <div className="mt-20" />
         <Footer />
+        <ScrollToTopButton />
       </main>
     </ParallaxProvider>
   );

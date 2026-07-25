@@ -7,6 +7,7 @@ import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function Home() {
   const youtubeLinks = [
@@ -588,6 +589,7 @@ export default function Home() {
           </section>
 
           <Footer />
+          <ScrollToTopButton />
         </div>
       </main>
     </ParallaxProvider>
