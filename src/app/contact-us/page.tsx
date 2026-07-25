@@ -6,6 +6,7 @@ import Lenis from "lenis";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function Home() {
   // Smooth scroll
@@ -107,6 +108,7 @@ export default function Home() {
 
         <div className="mt-20" />
         <Footer />
+        <ScrollToTopButton />
       </main>
     </ParallaxProvider>
   );

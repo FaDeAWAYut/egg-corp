@@ -3,6 +3,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackButton from "@/components/BackButton";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 import { adminDb } from "@/lib/firebase-admin";
 
 export default async function NewsDetail({
@@ -84,6 +85,7 @@ export default async function NewsDetail({
 
       <div className="mt-20" />
       <Footer />
+      <ScrollToTopButton />
     </main>
   );
 }

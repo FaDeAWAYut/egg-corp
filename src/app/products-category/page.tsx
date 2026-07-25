@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import CategorySelector from "@/components/CategorySelector";
 import CategoryBanner from "@/components/CategoryBanner";
 import TopBanner from "@/components/TopBanner";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function Home() {
   // Smooth scroll
@@ -53,6 +54,7 @@ export default function Home() {
         {/* Product category banners */}
         <CategoryBanner />
         <Footer />
+        <ScrollToTopButton />
       </main>
     </ParallaxProvider>
   );

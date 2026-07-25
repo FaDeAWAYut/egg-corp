@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import ProductsListClient from "./ProductsListClient";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function Page() {
   return (
@@ -11,6 +12,7 @@ export default function Page() {
       }
     >
       <ProductsListClient />
+      <ScrollToTopButton />
     </Suspense>
   );
 }
